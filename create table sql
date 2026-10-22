@@ -1,0 +1,27 @@
+USE pasar_tradisional;
+
+
+CREATE TABLE pembeli (
+    id_pelaku INT UNSIGNED NOT NULL,
+    PRIMARY KEY (id_pelaku)
+);
+
+
+CREATE TABLE pedagang (
+    id_pelaku INT UNSIGNED NOT NULL,
+    id_kios   INT UNSIGNED NOT NULL,
+    PRIMARY KEY (id_pelaku)
+);
+CREATE TABLE transaksi (
+    id_transaksi      INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    id_pembeli        INT UNSIGNED NOT NULL,
+    id_pedagang       INT UNSIGNED NOT NULL,
+    tanggal           DATE NOT NULL,
+    metode_pembayaran VARCHAR(30) NOT NULL,
+    total_bayar       DECIMAL(14,2) NOT NULL DEFAULT 0.00,
+    PRIMARY KEY (id_transaksi),
+    CONSTRAINT fk_transaksi_pembeli
+        FOREIGN KEY (id_pembeli) REFERENCES pembeli(id_pelaku),
+    CONSTRAINT fk_transaksi_pedagang
+        FOREIGN KEY (id_pedagang) REFERENCES pedagang(id_pelaku)
+);
