@@ -1,0 +1,7 @@
+SELECT p.nama AS nama_pembeli,
+       COUNT(t.id_transaksi) AS jumlah_transaksi,
+       SUM(t.total_harga) AS total_belanja
+FROM pelaku_pasar p
+JOIN transaksi t ON p.id_pelaku = t.id_pembeli
+WHERE t.status = 'Selesai'
+GROUP BY p.nama;
